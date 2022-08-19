@@ -1,0 +1,26 @@
+nohup /data/iarpa/analysis/noblis/te4/code/PanGenomePipeline/pangenome/bin/FELIX/multi_pgg_annotate_new.pl \
+-genomes /data/iarpa/analysis/noblis/results/pgg/s_ent/PGG_genomes_fasta.list \
+-new_genomes annotate_genomes_fasta.list \
+-topology /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/initial_PGG/topology.txt \
+-new_topology annotate_topology.txt \
+-pgg /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/pgg.txt \
+-single_copy /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/single_copy_clusters.txt \
+-pggdb /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/initial_PGG/PGG_blastdb \
+-bin_directory /data/iarpa/analysis/noblis/te4/code/PanGenomePipeline/pangenome/bin/FELIX \
+-blast_directory /usr/bin \
+-ld_load_directory /usr/bin \
+-blast_task blastn \
+-muscle_path /data/iarpa/analysis/noblis/te4/code/PanGenomePipeline/pangenome/bin/muscle \
+-rscript_path /usr/bin/Rscript \
+-multifastadir /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/multifasta \
+-attributes /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/combined.att \
+-weights /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/cluster_sizes.txt \
+-project NONE \
+-medoids /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/medoids.fasta \
+-match /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/matchtable.txt \
+-qsub_queue NONE \
+-max_grid_jobs 100 \
+-strip_version \
+-less_memory \
+-no_grid \
+-debug

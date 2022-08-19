@@ -16,7 +16,7 @@ nohup python3 te4/code/post-processing/merge_gff_summaries.py \
 
 nohup python3 te4/code/post-processing/merge_gff_summaries.py \
 -d results/biov/organism_specific/N412.s_ent/ \
--m te4/data/indices/organisms/s_ent/putida.v2_mapper.txt \
+-m te4/data/indices/organisms/s_ent/s_ent.v2_mapper.txt \
 -o results/biov/organism_specific/N412.s_ent/merged_gff_summaries_s_ent.csv \
 -l results/biov/organism_specific/N412.s_ent/logs/merge_gff_summaries.log &
 

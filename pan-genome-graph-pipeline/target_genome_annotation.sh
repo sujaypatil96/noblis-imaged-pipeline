@@ -1,26 +1,55 @@
-nohup /data/iarpa/analysis/noblis/te4/code/PanGenomePipeline/pangenome/bin/FELIX/multi_pgg_annotate_new.pl \
--genomes /data/iarpa/analysis/noblis/results/pgg/s_ent/PGG_genomes_fasta.list \
--new_genomes annotate_genomes_fasta.list \
--topology /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/initial_PGG/topology.txt \
--new_topology annotate_topology.txt \
--pgg /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/pgg.txt \
--single_copy /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/single_copy_clusters.txt \
--pggdb /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/initial_PGG/PGG_blastdb \
--bin_directory /data/iarpa/analysis/noblis/te4/code/PanGenomePipeline/pangenome/bin/FELIX \
--blast_directory /usr/bin \
--ld_load_directory /usr/bin \
--blast_task blastn \
--muscle_path /data/iarpa/analysis/noblis/te4/code/PanGenomePipeline/pangenome/bin/muscle \
--rscript_path /usr/bin/Rscript \
--multifastadir /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/multifasta \
--attributes /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/combined.att \
--weights /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/cluster_sizes.txt \
--project NONE \
--medoids /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/medoids.fasta \
--match /data/iarpa/analysis/noblis/te4/data/pggs/PGGS/s_ent/refined_PGG/matchtable.txt \
--qsub_queue NONE \
--max_grid_jobs 100 \
--strip_version \
--less_memory \
--no_grid \
--debug
+# path to multi_pgg_annotate_new.pl script
+TARGET_GENOME_ANNOTATION_PL = $1
+
+# list of genome identifiers with paths to contigs
+PGG_GENOMES_LIST = $2
+
+# new list with target genomes to be annotated
+NEW_GENOMES = $3
+
+# linear and circular contigs
+TOPOLOGY = $4
+
+# toplogy file for target genomes to be annotated
+NEW_TOPOLOGY = $5
+
+# location of refined PGG directory
+REFINED_PGG_DIR = $6
+
+# organism specific initial PGG
+INITIAL_PGG_DIR = $7
+
+# path to all FELIX binaries directory
+FELIX_BIN = $8
+
+# path to Muscle binary
+MUSCLE_BIN = $9
+
+USR_BIN = "usr/bin"
+
+nohup ${TARGET_GENOME_ANNOTATION_PL} \
+    -genomes ${PGG_GENOMES_LIST} \
+    -new_genomes ${NEW_GENOMES} \
+    -topology ${TOPOLOGY} \
+    -new_topology ${NEW_TOPOLOGY} \
+    -pgg ${REFINED_PGG_DIR}/pgg.txt \
+    -single_copy ${REFINED_PGG_DIR}/single_copy_clusters.txt \
+    -pggdb ${INITIAL_PGG_DIR}/PGG_blastdb \
+    -bin_directory ${FELIX_BIN} \
+    -blast_directory ${USR_BIN} \
+    -ld_load_directory ${USR_BIN} \
+    -blast_task blastn \
+    -muscle_path ${MUSCLE_BIN} \
+    -rscript_path ${USR_BIN}/Rscript \
+    -multifastadir ${REFINED_PGG_DIR}/multifasta \
+    -attributes ${REFINED_PGG_DIR}/combined.att \
+    -weights ${REFINED_PGG_DIR}/cluster_sizes.txt \
+    -project NONE \
+    -medoids ${REFINED_PGG_DIR}/medoids.fasta \
+    -match ${REFINED_PGG_DIR}/matchtable.txt \
+    -qsub_queue NONE \
+    -max_grid_jobs 100 \
+    -strip_version \
+    -less_memory \
+    -no_grid \
+    -debug

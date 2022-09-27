@@ -1,22 +1,25 @@
-nohup python3 te4/code/tools/run_biov.py te4/code/biov/BioVelocity_1_2_10 \
--d results/biov/jobfiles/sample_composition \
--rE -R spatil@lbl.gov > results/biov/sample_composition/logs/sample_composition.log &
+# path to sample_composition.py file
+SAMPLE_COMPOSITION_PY = $1
 
-nohup python3 /data/iarpa/analysis/noblis/te4/code/post-processing/sample_composition.py \ 
-    -d /data/iarpa/analysis/noblis/results/biov/sample_composition/${samplename}.bac/ \
-    -o /data/iarpa/analysis/noblis/results/sample_composition/ \ 
-    -m /data/iarpa/analysis/noblis/te4/data/indices/sample_comp/bac/prok.v4_mapper.txt \ 
-    -t bac
+# path to dir with BioV output
+BIOV_OUTPUT_DIR = $2
 
-nohup python3 /data/iarpa/analysis/noblis/te4/code/post-processing/sample_composition.py \ 
-    -d /data/iarpa/analysis/noblis/results/biov/sample_composition/${samplename}.euk/ \
-    -o /data/iarpa/analysis/noblis/results/sample_composition/ \
-    -m /data/iarpa/analysis/noblis/te4/data/indices/sample_comp/euk/euk.v4_mapper.txt \
-    -t euk
+# path to species mapper file
+ORGANISM_MAPPER = $3
 
-nohup python3 /data/iarpa/analysis/noblis/te4/code/post-processing/sample_composition.py \
-    -d /data/iarpa/analysis/noblis/results/biov/sample_composition/${samplename}.viral/ \
-    -o /data/iarpa/analysis/noblis/results/sample_composition/  \
-    -m /data/iarpa/analysis/noblis/te4/data/indices/sample_comp/viral/virus.v3_mapper.txt \
-    -t viral
-    
+# path to dir with sample composition output
+OUTPUT_DIR = $4
+
+if [[ $ORGANISM_MAPPER == *"prok"* ]]; then
+    IDX = "bac"
+elif [[ $ORGANISM_MAPPER == *"euk"* ]]; then
+    IDX = "euk"
+elif [[ $ORGANISM_MAPPER == *"viral"* ]]; then
+    IDX = "viral"
+fi
+
+nohup python ${SAMPLE_COMPOSITION_PY} \ 
+    -d ${BIOV_OUTPUT_DIR} \
+    -m ${ORGANISM_MAPPER} \ 
+    -o ${OUTPUT_DIR} \ 
+    -t ${IDX}

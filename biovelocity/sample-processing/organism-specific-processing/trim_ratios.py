@@ -1,19 +1,47 @@
 import re
+import argparse
+
 import pandas as pd
 
+parser = argparse.ArgumentParser()
+
+# add required keyword arguments to argparse parser
+parser.add_argument("--ratios", required=True, help="Path to input BioV ratios file")
+parser.add_argument(
+    "--inputs", required=True, help="Path to organism specific Sample_Inputs.txt file"
+)
+parser.add_argument(
+    "--output",
+    required=True,
+    help="Path to filtered classifier compatible output ratios file",
+)
+
+args = parser.parse_args()
+
 # path to unfiltered ratios output from BioV
-ratios_path = r"/Users/sujaypatil/Desktop/noblis-imaged-pipeline/biovelocity/sample-processing/organism-specific-processing/data/merged_gff_summaries_s_ent_ratio.csv"
+ratios_path = args.ratios
 
 # organism specific Sample_Inputs.txt file from Noblis source code
-sample_inputs_path = r"/Users/sujaypatil/Desktop/noblis-imaged-pipeline/biovelocity/sample-processing/organism-specific-processing/data/Sample_Inputs.txt"
+sample_inputs_path = args.inputs
 
 # filtered ratios output after processing using trim_ratios.py
-filtered_ratios_path = r"/Users/sujaypatil/Desktop/noblis-imaged-pipeline/biovelocity/sample-processing/organism-specific-processing/data/filtered_merged_gff_summaries_s_ent_ratio.csv"
+filtered_ratios_path = args.output
 
 ratios_df = pd.read_csv(ratios_path)
 
 # remove columns 1 through 6
-ratios_df.drop(columns=["readset", "total reads", "total alignments", "perfect alignments", "imperfect alignments", "unaligned reads"], axis=1, inplace=True)
+ratios_df.drop(
+    columns=[
+        "readset",
+        "total reads",
+        "total alignments",
+        "perfect alignments",
+        "imperfect alignments",
+        "unaligned reads",
+    ],
+    axis=1,
+    inplace=True,
+)
 
 # sort columns in ratios file alphabetically
 ratios_df = ratios_df[sorted(ratios_df)]

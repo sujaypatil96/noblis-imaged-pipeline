@@ -11,6 +11,8 @@ To run the script you will need 3 files:
 * `--inputs`: `Sample_Inputs.txt` file that is specific to your organism from Noblis TE4 source code
 * `--output`: processed ratios output file path as TSV file
 
+Note: Make sure you are in the conda `felix` environment by running `conda activate felix` prior to running this script.
+
 Command:
 
 ```

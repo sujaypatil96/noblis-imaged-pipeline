@@ -54,4 +54,4 @@ genomes_subset = list(filter(r.match, genomes_subset.columns.to_list()))
 # subset ratios file based on genome list from Sample_Inputs.txt
 ratios_df = ratios_df[ratios_df.columns.intersection(genomes_subset)]
 
-ratios_df.to_csv(filtered_ratios_path, header=False)
+ratios_df.to_csv(filtered_ratios_path, header=False, sep="\t")

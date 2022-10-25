@@ -47,9 +47,9 @@ ratios_df.drop(
 ratios_df = ratios_df[sorted(ratios_df)]
 
 # regular expression to remove all non genome columns from Sample_Inputs.txt
-r = re.compile("^[SAM][a-zA-Z0-9]*")
+# r = re.compile("^[SAM][a-zA-Z0-9]*")
 genomes_subset = pd.read_csv(sample_inputs_path, sep="\t", nrows=1)
-genomes_subset = list(filter(r.match, genomes_subset.columns.to_list()))
+# genomes_subset = list(filter(r.match, genomes_subset.columns.to_list()))
 
 # subset ratios file based on genome list from Sample_Inputs.txt
 ratios_df = ratios_df[ratios_df.columns.intersection(genomes_subset)]

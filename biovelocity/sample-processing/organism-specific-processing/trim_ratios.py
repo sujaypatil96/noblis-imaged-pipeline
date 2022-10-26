@@ -50,8 +50,9 @@ ratios_df = ratios_df[sorted(ratios_df)]
 # r = re.compile("^[SAM][a-zA-Z0-9]*")
 genomes_subset = pd.read_csv(sample_inputs_path, sep="\t", nrows=1)
 # genomes_subset = list(filter(r.match, genomes_subset.columns.to_list()))
+genomes_subset = genomes_subset.columns.to_list()
 
 # subset ratios file based on genome list from Sample_Inputs.txt
 ratios_df = ratios_df[ratios_df.columns.intersection(genomes_subset)]
 
-ratios_df.to_csv(filtered_ratios_path, header=False, sep="\t")
+ratios_df.to_csv(filtered_ratios_path, header=False, index=False, sep="\t")
